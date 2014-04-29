@@ -9,16 +9,17 @@
 <body>
 
 <div ng-app>
-  <div ng-controller="HelloController">
+  <div class="container" ng-controller="HelloController">
   {{data.hello}} {{data.world}}!
+
+  <form>
+    <button type="submit" class="btn btn-primary" ng-click="changeHello()">Okey</button>
+    <button type="rollback" class="btn" ng-click="rollbackHello()">Cancel</button>
+  </form>
   </div>
 </div>
 
 <%= yield %>
 
-<form>
-  <button class="btn btn-primary">Okey</button>
-  <button class="btn">Cancel</button>
-</form>
 </body>
 </html>

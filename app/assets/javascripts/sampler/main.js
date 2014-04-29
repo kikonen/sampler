@@ -1,7 +1,14 @@
 function HelloController($scope) {
   $scope.data = {
-    hello: 'Huomenta',
+    hello: 'Aamua',
     world: 'Mualima'
   };
-  console.log($scope.data);
+
+  $scope.changeHello = function() {
+    $scope.data.hello = 'Iltapäevää';
+  };
+
+  $scope.rollbackHello = function() {
+    $scope.data.hello = 'Uamua';
+  };
 }
