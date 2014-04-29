@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 # Declare your gem's dependencies in sampler.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -16,6 +16,5 @@ gem "jquery-rails"
 # To use debugger
 # gem 'debugger'
 
-group :development, :test do
-  gem 'pry-rails'
-end
+gem 'sass-rails'
+gem 'bootstrap-sass'

@@ -10,6 +10,15 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
+// require jquery
+// require jquery_ujs
+//= require bootstrap
+//= require angular/angular.min.js
+//= require angular-ui-router/release/angular-ui-router.min.js
+//= require angular-animate/angular-animate.min.js
+//= require angular-resource/angular-resource.min.js
+//= require angular-cookies/angular-cookies.min.js
+//= require ng-auth/dist/ng-auth.min.js
+//= require ng-auth/dist/ng-auth-basic.min.js
+// require main
 //= require_tree .

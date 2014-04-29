@@ -1,4 +1,9 @@
 .bundle/
 log/*
 pkg/
-tmp/*
+tmp
+test/dummy/db/*.sqlite3
+test/dummy/log/*.log
+test/dummy/tmp/
+test/dummy/.sass-cache
+.sass-cache

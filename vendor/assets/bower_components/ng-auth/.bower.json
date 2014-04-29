@@ -1,0 +1,36 @@
+{
+  "name": "ng-auth",
+  "main": "./dist/ng-auth.js",
+  "dependencies": {
+    "angular": ">= 1.0.8",
+    "angular-resource": ">= 1.0.8"
+  },
+  "devDependencies": {
+    "angular-mocks": ">= 1.0.8",
+    "angular-cookies": ">= 1.0.8"
+  },
+  "ignore": [
+    "bower_components",
+    "build",
+    "node_modules",
+    "spec",
+    "src",
+    ".gitignore",
+    ".jscs.json",
+    "bower.json",
+    "gulpfile.js",
+    "karma.conf.js",
+    "package.json",
+    "README.md"
+  ],
+  "homepage": "https://github.com/nivardus/ng-auth",
+  "_release": "fe7bc0fcc0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fe7bc0fcc02385dd109ebe2a9595a2f93f2dcf2c"
+  },
+  "_source": "git://github.com/nivardus/ng-auth.git",
+  "_target": "*",
+  "_originalSource": "ng-auth"
+}

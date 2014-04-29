@@ -8,7 +8,17 @@
 </head>
 <body>
 
+<div ng-app>
+  <div ng-controller="HelloController">
+  {{data.hello}} {{data.world}}!
+  </div>
+</div>
+
 <%= yield %>
 
+<form>
+  <button class="btn btn-primary">Okey</button>
+  <button class="btn">Cancel</button>
+</form>
 </body>
 </html>

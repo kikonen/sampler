@@ -1,0 +1,5 @@
+asset "ng-auth"
+asset "angular-animate"
+asset "angular-cookies"
+asset "angular-resource"
+asset "angular-ui-router"
