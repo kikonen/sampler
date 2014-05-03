@@ -1,10 +1,12 @@
 {
   "name": "dsl-generated dependencies",
   "dependencies": {
+    "jquery": "latest",
     "ng-auth": "latest",
     "angular-animate": "latest",
     "angular-cookies": "latest",
     "angular-resource": "latest",
-    "angular-ui-router": "latest"
+    "angular-ui-router": "latest",
+    "angular-route": "latest"
   }
 }

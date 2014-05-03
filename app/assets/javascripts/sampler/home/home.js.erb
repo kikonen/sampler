@@ -1,0 +1,26 @@
+//= depend_on_asset "home/home.html"
+"use strict";
+angular
+  .module('sampler.home', [
+    'ngRoute',
+    'sampler.hello'])
+  .config(function($routeProvider) {
+    console.log("config: sampler.home");
+    $routeProvider
+      .when("/sampler", {
+        templateUrl: '<%= asset_path('home/home.html') %>',
+        controller: 'HomeController',
+        redirectTo: function(current, path, search) {
+          if (search.path) {
+            return "/sampler/" + search.path;
+          } else {
+            return "/sampler";
+          }
+        }
+      });
+  })
+  .controller('HomeController', ['$scope', function($scope) {
+    $scope.data = {
+      message: 'koti'
+    };
+  }]);

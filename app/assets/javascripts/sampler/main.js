@@ -1,14 +1,24 @@
-function HelloController($scope) {
-  $scope.data = {
-    hello: 'Aamua',
-    world: 'Mualima'
-  };
+"use strict";
+angular
+  .module('sampler', [
+    'ngRoute',
+    'ngResource',
+    'ngCookies',
+    'ng-auth',
+    'ng-auth.strategies.basic',
+    'sampler.home'])
+  .config(function($httpProvider, $routeProvider, $locationProvider, authProvider) {
+    console.log("config: sampler");
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
 
-  $scope.changeHello = function() {
-    $scope.data.hello = 'Iltapäevää';
-  };
+    authProvider.register('basic', {
+      strategy: 'basic'
+    });
 
-  $scope.rollbackHello = function() {
-    $scope.data.hello = 'Uamua';
-  };
-}
+    $locationProvider.html5Mode(true);
+
+    $routeProvider
+      .otherwise({
+        redirectTo: "/sampler"
+      });
+  });

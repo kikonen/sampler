@@ -1,0 +1,26 @@
+//= depend_on_asset "hello/hello.html"
+"use strict";
+angular
+  .module('sampler.hello', ['ngRoute'])
+  .config(function($routeProvider) {
+    console.log("config: sampler.hello");
+    $routeProvider
+      .when("/sampler/hello", {
+        templateUrl: '<%= asset_path('hello/hello.html') %>',
+        controller: 'HelloController'
+      });
+  })
+  .controller('HelloController', ['$scope', function($scope) {
+    $scope.data = {
+      hello: 'Aamua',
+      world: 'Mualima'
+    };
+
+    $scope.changeHello = function() {
+      $scope.data.hello = 'Iltapäevää';
+    };
+
+    $scope.rollbackHello = function() {
+      $scope.data.hello = 'Uamua';
+    };
+  }]);
