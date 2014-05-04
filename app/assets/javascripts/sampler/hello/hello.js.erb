@@ -19,6 +19,8 @@ angular
       url: 'http://localhost:3000',
       method: 'GET',
       api: '/api/test',
+      login_api: '/api/login',
+      logout_api: '/api/logout',
       query: '',
       username: '',
       password: ''
@@ -40,11 +42,15 @@ angular
     };
 
     $scope.login = function() {
-      AuthenticationService.login($scope.server.url, $scope.user.username, $scope.user.password);
+      AuthenticationService.login(
+        $scope.server.url,
+        $scope.user.username,
+        $scope.user.password,
+        $scope.server.login_api);
     };
 
     $scope.logout = function() {
-      AuthenticationService.logout();
+      AuthenticationService.logout($scope.server.logout_api);
     };
 
     $scope.changeHello = function() {
@@ -54,7 +60,7 @@ angular
       var url = s.url + s.api + s.query;
       console.log(url);
       console.log(s);
-      $http( {method: s.method, url: url})
+      $http( {method: s.method, url: url, withCredentials: true})
         .success(function(data, status, headers, config) {
           $scope.api = {
             data: data,

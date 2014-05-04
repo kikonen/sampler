@@ -15,17 +15,17 @@ angular
          return !!$cookies.auth_token;
        };
 
-       this.login = function(server, username, password) {
+       this.login = function(server, username, password, api) {
          $cookieStore.remove('auth_token');
          state.username = username;
          state.server = server;
 
          basic.credentials(username, password);
-         var url = server + '/api/login';
+         var url = server + api;
          console.log(server);
          console.log("login: " + url);
 
-         basic.$http({method: 'GET', url: url, Authentication: 'xxx:yyy'})
+         basic.$http({method: 'GET', url: url, withCredentials: true, Authentication: 'xxx:yyy'})
            .success(function(data, status, headers, config) {
              console.log(status);
              console.log("login: SUCCESS");
@@ -37,9 +37,9 @@ angular
            });
        };
 
-       this.logout = function() {
+       this.logout = function(api) {
          console.log("logout: " + server);
-         var url = state.server + '/api/logout';
+         var url = state.server + api;
          console.log("logout: " + url);
 
          basic.$http({method: 'DELETE', url: url})

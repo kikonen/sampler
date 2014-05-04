@@ -8,8 +8,8 @@
   <form>
     <label>Username: </label> <input type="text" ng-model="user.username"><br>
     <label>Password: </label> <input type="password" ng-model="user.password"><br>
-    <button type="Logout" class="btn btn-primary" ng-click="login()">Login</button>
-    <button type="Login" class="btn" ng-click="logout()">Logout</button>
+    <button class="btn btn-primary" ng-click="login()">Login</button>
+    <button class="btn" ng-click="logout()">Logout</button>
   </form>
 
   <form>
@@ -27,4 +27,9 @@
   <b>Headers:</b> {{ api.headers }} <br>
   <b>Config:</b> {{ api.config }} <br>
   <hr>
+
+  <form>
+    <label>Login API: </label> <input type="text" ng-model="server.login_api"><br>
+    <label>Logout API: </label> <input type="text" ng-model="server.logout_api"><br>
+  </form>
 </div>
