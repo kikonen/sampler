@@ -1,11 +1,30 @@
-/ <a href="/sampler">Home</a>
-/ <a href="/sampler/hello">Hello</a>
+/ <a href=".">Home</a>
+/ <a href="./hello">Hello</a>
 <hr>
 <div class="container">
-{{data.hello}} {{data.world}}!
 
-<form>
-  <button type="submit" class="btn btn-primary" ng-click="changeHello()">Okey</button>
-  <button type="rollback" class="btn" ng-click="rollbackHello()">Cancel</button>
-</form>
+  {{data.hello}} {{data.world}}!
+
+  <form>
+    <label>Username: </label> <input type="text" ng-model="user.username"><br>
+    <label>Password: </label> <input type="password" ng-model="user.password"><br>
+    <button type="Logout" class="btn btn-primary" ng-click="login()">Login</button>
+    <button type="Login" class="btn" ng-click="logout()">Logout</button>
+  </form>
+
+  <form>
+    <label>Server: </label> <input type="text" ng-model="server.url"><br>
+    <label>Method: </label> <input type="text" ng-model="server.method"><br>
+    <label>API: </label> <input type="text" ng-model="server.api"><br>
+    <label>Param: </label> <input type="text" ng-model="server.query"><br>
+    <button type="submit" class="btn btn-primary" ng-click="changeHello()">Okey</button>
+    <button type="rollback" class="btn" ng-click="rollbackHello()">Cancel</button>
+  </form>
+
+  <hr>
+  <b>Status:</b> {{ api.status }} <br>
+  <b>Data:</b> {{ api.data }} <br>
+  <b>Headers:</b> {{ api.headers }} <br>
+  <b>Config:</b> {{ api.config }} <br>
+  <hr>
 </div>

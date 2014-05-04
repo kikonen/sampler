@@ -19,6 +19,6 @@ angular
 
     $routeProvider
       .otherwise({
-        redirectTo: "/sampler"
+        redirectTo: "/"
       });
   });

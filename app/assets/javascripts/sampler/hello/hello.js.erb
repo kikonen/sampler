@@ -1,26 +1,88 @@
 //= depend_on_asset "hello/hello.html"
 "use strict";
 angular
-  .module('sampler.hello', ['ngRoute'])
+  .module('sampler.hello', ['ngRoute', 'sampler.auth'])
   .config(function($routeProvider) {
     console.log("config: sampler.hello");
     $routeProvider
-      .when("/sampler/hello", {
-        templateUrl: '<%= asset_path('hello/hello.html') %>',
+      .when("/hello", {
+        templateUrl: "<%= asset_path('hello/hello.html') %>",
         controller: 'HelloController'
       });
   })
-  .controller('HelloController', ['$scope', function($scope) {
+  .controller('HelloController', [
+    '$scope',
+    '$http',
+    'AuthenticationService',
+  function(
+    $scope,
+    $http,
+    AuthenticationService) {
+    $scope.server = {
+      url: 'http://localhost:3000',
+      method: 'GET',
+      api: '/api/test',
+      query: '',
+      username: '',
+      password: ''
+    };
+    $scope.user = {
+      username: 'test',
+      password: 'password'
+    };
+
     $scope.data = {
       hello: 'Aamua',
       world: 'Mualima'
     };
+    $scope.api = {
+      data: '-',
+      status: '-',
+      headers: '-',
+      config: '-'
+    };
+
+    $scope.login = function() {
+      AuthenticationService.login($scope.server.url, $scope.user.username, $scope.user.password);
+    };
+
+    $scope.logout = function() {
+      AuthenticationService.logout();
+    };
 
     $scope.changeHello = function() {
       $scope.data.hello = 'Iltapäevää';
+      console.log("start call");
+      var s = $scope.server;
+      var url = s.url + s.api + s.query;
+      console.log(url);
+      console.log(s);
+      $http( {method: s.method, url: url})
+        .success(function(data, status, headers, config) {
+          $scope.api = {
+            data: data,
+            status: status,
+            headers: headers,
+            config: config
+          };
+        })
+        .error(function(data, status, headers, config) {
+          $scope.api = {
+            data: data,
+            status: status,
+            headers: headers,
+            config: config
+          };
+        });
     };
 
     $scope.rollbackHello = function() {
       $scope.data.hello = 'Uamua';
+      $scope.api = {
+        data: '-',
+        status: '-',
+        headers: '-',
+        config: '-'
+      };
     };
   }]);

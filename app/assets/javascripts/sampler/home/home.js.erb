@@ -7,14 +7,17 @@ angular
   .config(function($routeProvider) {
     console.log("config: sampler.home");
     $routeProvider
-      .when("/sampler", {
-        templateUrl: '<%= asset_path('home/home.html') %>',
+      .when("/", {
+        templateUrl: "<%= asset_path('home/home.html') %>",
         controller: 'HomeController',
         redirectTo: function(current, path, search) {
+          console.log(current);
+          console.log(path);
+          console.log(search);
           if (search.path) {
-            return "/sampler/" + search.path;
+            return "/" + search.path;
           } else {
-            return "/sampler";
+            return "/";
           }
         }
       });
