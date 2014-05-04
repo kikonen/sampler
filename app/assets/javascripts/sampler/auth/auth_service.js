@@ -3,7 +3,6 @@ angular
   .module('sampler.auth', ['ng-auth'] )
   .service(
     "AuthenticationService",
-    ["$http", "$cookies", "$cookieStore", "auth",
      function($http, $cookies, $cookieStore, auth) {
        var basic = auth.get('basic');
 
@@ -53,4 +52,4 @@ angular
              basic.forgetCredentials();
       });
        };
-     }]);
+     });

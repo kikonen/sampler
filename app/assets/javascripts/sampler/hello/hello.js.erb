@@ -10,10 +10,7 @@ angular
         controller: 'HelloController'
       });
   })
-  .controller('HelloController', [
-    '$scope',
-    '$http',
-    'AuthenticationService',
+  .controller('HelloController',
   function(
     $scope,
     $http,
@@ -73,6 +70,7 @@ angular
             headers: headers,
             config: config
           };
+          window.open(url);
         });
     };
 
@@ -85,4 +83,4 @@ angular
         config: '-'
       };
     };
-  }]);
+  });
