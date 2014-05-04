@@ -22,8 +22,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'logging-rails'
   s.add_dependency 'awesome_print'
 
-  s.add_dependency 'sass-rails'
-  s.add_dependency 'bootstrap-sass'
+  # For assets pipeline
+  s.add_dependency 'ngmin-rails'
+  s.add_dependency 'bootstrap-sass', '~> 2.3.1.0'
+  s.add_dependency 'sass-rails',   '~> 3.2.3'
+  s.add_dependency 'therubyracer'
+  s.add_dependency 'uglifier', '>= 1.0.3'
 
   s.add_development_dependency 'bower-rails'
   s.add_development_dependency 'sqlite3'

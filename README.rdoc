@@ -1,3 +1,12 @@
 = Sampler
 
-This project rocks and uses MIT-LICENSE.
+Add this into Gemfile
+```
+group :assets do
+  gem 'ngmin-rails'
+  gem 'bootstrap-sass', '~> 2.3.1.0'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'therubyracer', platforms: :ruby
+  gem 'uglifier', '>= 1.0.3'
+end
+```
