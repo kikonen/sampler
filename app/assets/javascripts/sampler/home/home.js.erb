@@ -2,28 +2,20 @@
 "use strict";
 angular
   .module('sampler.home', [
-    'ngRoute',
+    'ui.router',
     'sampler.hello'])
-  .config(function($routeProvider) {
-    console.log("config: sampler.home");
-    $routeProvider
-      .when("/", {
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("home", {
+        url: "/home",
         templateUrl: "<%= asset_path('home/home.html') %>",
-        controller: 'HomeController',
-        redirectTo: function(current, path, search) {
-          console.log(current);
-          console.log(path);
-          console.log(search);
-          if (search.path) {
-            return "/" + search.path;
-          } else {
-            return "/";
-          }
-        }
+        controller: 'HomeController'
       });
   })
-  .controller('HomeController', function($scope) {
-    $scope.data = {
-      message: 'koti'
-    };
-  });
+  .controller(
+    'HomeController',
+    function($scope) {
+      $scope.data = {
+        message: 'koti'
+      };
+    });

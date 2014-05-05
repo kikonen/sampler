@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="sampler">
 <head>
   <title>Sampler</title>
   <base href="/sampler/" />
@@ -8,8 +8,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div ng-app="sampler">
-    <div ng-view></div>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" ui-sref="home">Home</a>
+        <ul class="nav">
+          <li ng-class="{active: $state.includes('hello')}"><a ui-sref="hello">Hello</a></li>
+          <li ui-sref-active="active"><a ui-sref="about">About</a></li>
+        </ul>
+
+        <p ui-view="hint" class="navbar-text pull-right"></p>
+      </div>
+    </div>
   </div>
+  <div ui-view class="container" style="padding-top: 80px;"></div>
 </body>
 </html>

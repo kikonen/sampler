@@ -1,16 +1,5 @@
-/ <a href=".">Home</a>
-/ <a href="./hello">Hello</a>
-<hr>
 <div class="container">
-
   {{data.hello}} {{data.world}}!
-
-  <form>
-    <label>Username: </label> <input type="text" ng-model="user.username"><br>
-    <label>Password: </label> <input type="password" ng-model="user.password"><br>
-    <button class="btn btn-primary" ng-click="login()">Login</button>
-    <button class="btn" ng-click="logout()">Logout</button>
-  </form>
 
   <form>
     <label>Server: </label> <input type="text" ng-model="server.url"><br>
@@ -29,6 +18,11 @@
   <hr>
 
   <form>
+    <label>Server: </label> <input type="text" ng-model="server.url"><br>
     <label>Login API: </label> <input type="text" ng-model="server.login_api"><br>
+    <label>Username: </label> <input type="text" ng-model="user.username"><br>
+    <label>Password: </label> <input type="password" ng-model="user.password"><br>
+    <button class="btn btn-primary" ng-click="login()">Login</button>
+    <button class="btn" ng-click="logout()">Logout</button>
   </form>
 </div>

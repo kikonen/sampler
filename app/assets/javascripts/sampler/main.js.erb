@@ -1,0 +1,39 @@
+"use strict";
+angular
+  .module('sampler', [
+    'ui.router',
+    'ngAnimate',
+    'ngResource',
+    'ngCookies',
+    'ng-auth',
+    'ng-auth.strategies.basic',
+    'sampler.home'])
+  .run(function ($rootScope,   $state,   $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+  })
+  .config(function(
+    $httpProvider,
+    $locationProvider,
+    $stateProvider,
+    $urlRouterProvider,
+    authProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+    $locationProvider.html5Mode(true);
+
+    authProvider.register('basic', {
+      strategy: 'basic'
+    });
+
+    $urlRouterProvider
+      .when("/?path", ['$match', function ($match) {
+        return "/" + $match['path'];
+      }])
+      .otherwise('/home');
+
+    $stateProvider
+      .state('about', {
+        url: '/about',
+        templateUrl: "<%= asset_path('about.html') %>"
+      });
+  });

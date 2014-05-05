@@ -1,20 +1,21 @@
 //= depend_on_asset "hello/hello.html"
 "use strict";
 angular
-  .module('sampler.hello', ['ngRoute', 'sampler.auth'])
-  .config(function($routeProvider) {
-    console.log("config: sampler.hello");
-    $routeProvider
-      .when("/hello", {
+  .module('sampler.hello', ['ui.router', 'sampler.auth'])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("hello", {
+        url: "/hello",
         templateUrl: "<%= asset_path('hello/hello.html') %>",
         controller: 'HelloController'
       });
   })
-  .controller('HelloController',
-  function(
-    $scope,
-    $http,
-    AuthenticationService) {
+  .controller(
+    'HelloController',
+    function(
+      $scope,
+      $http,
+      AuthenticationService) {
     $scope.server = {
       url: 'http://localhost:3000',
       method: 'GET',
