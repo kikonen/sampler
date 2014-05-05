@@ -1,0 +1,43 @@
+//= depend_on_asset "login/login.html"
+"use strict";
+angular
+  .module('sampler.login', ['ui.router', 'sampler.auth'])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("login", {
+        url: "/login",
+        templateUrl: "<%= asset_path('login/login.html') %>",
+        controller: 'LoginController'
+      });
+  })
+  .controller(
+    'LoginController',
+    function(
+      $scope,
+      $http,
+      AuthenticationService) {
+      var auth = AuthenticationService;
+
+      $scope.server = {
+        url: auth.getUrl(),
+        api: auth.getApi()
+      };
+      $scope.user = {
+        username: 'test',
+        password: 'password'
+      };
+
+      $scope.login = function() {
+        var server = $scope.server;
+        var user = $scope.user;
+
+        auth.setServer(server.url, server.api);
+        auth.login(
+          user.username,
+          user.password);
+      };
+
+      $scope.logout = function() {
+        auth.logout();
+      };
+    });
