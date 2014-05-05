@@ -38,7 +38,7 @@ angular
        };
 
        this.logout = function(api) {
-         console.log("logout: " + server);
+         console.log("logout: " + state.server);
          var url = state.server + api;
          console.log("logout: " + url);
 
