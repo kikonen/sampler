@@ -11,6 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require lodash/dist/lodash.min.js
+//= require lodash/dist/lodash.compat.min.js
+//= require lodash/dist/lodash.underscore.min.js
 //= require jquery/dist/jquery.min.js
 // require jquery_ujs
 //= require bootstrap

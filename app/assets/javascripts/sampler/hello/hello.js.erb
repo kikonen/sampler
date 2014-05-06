@@ -16,18 +16,12 @@ angular
       $scope,
       $http,
       AuthenticationService) {
-      console.log(AuthenticationService.getUrl());
     $scope.server = {
       url: AuthenticationService.getUrl(),
       method: 'GET',
       api: '/api/test',
       payload: ''
     };
-    $scope.user = {
-      username: 'test',
-      password: 'password'
-    };
-
     $scope.api = {
       data: '-',
       status: '-',

@@ -1,0 +1,67 @@
+//= depend_on_asset "tasks/tasks.html"
+//= depend_on_asset "tasks/index.html"
+//= depend_on_asset "tasks/show.html"
+//= depend_on_asset "tasks/edit.html"
+"use strict";
+angular
+  .module('sampler.tasks', ['ui.router', 'sampler.auth'])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("tasks", {
+        abstract: true,
+        url: "/tasks",
+        templateUrl: "<%= asset_path('tasks/tasks.html') %>",
+        controller: 'TasksController'
+      })
+      .state("tasks.index", {
+        url: "",
+        templateUrl: "<%= asset_path('tasks/index.html') %>",
+        controller: 'TasksIndexController'
+      });
+
+  })
+  .controller(
+    'TasksController',
+    function(
+      $scope,
+      Restangular,
+      AuthenticationService) {
+      $scope.server = {
+        url: AuthenticationService.getUrl()
+      };
+    })
+  .controller(
+    'TasksIndexController',
+    function(
+      $scope,
+      Restangular,
+      AuthenticationService) {
+
+      $scope.api = {
+        data: '-',
+        status: '-',
+        headers: '-',
+        config: '-'
+      };
+
+      $scope.call = function() {
+        console.log("start call");
+        Restangular.setBaseUrl($scope.server.url);
+
+        //withCredentials: true
+        var r = Restangular.all('/api/tasks');
+        r.getList().then(function(tasks) {
+          $scope.api.data = tasks;
+        });
+      };
+
+      $scope.clear = function() {
+        $scope.api = {
+          data: '-',
+          status: '-',
+          headers: '-',
+          config: '-'
+        };
+      };
+    }
+  );
