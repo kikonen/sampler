@@ -45,6 +45,7 @@ angular
       AuthenticationService) {
       AuthenticationService.login("admin", "password");
 
+      $scope.state = $state;
       $scope.base_url = '/api/tasks';
       $scope.data = {
         server: AuthenticationService.getUrl(),
@@ -52,7 +53,7 @@ angular
       };
 
       $scope.newTask = function() {
-        $state.go('tasks.edit', { taskId: null } );
+        $scope.state.go('tasks.edit', { taskId: null } );
       };
 
       $scope.reload = function() {
@@ -93,12 +94,19 @@ angular
             $scope.task = task;
           });
       }
+
+      $scope.deleteTask = function() {
+        $scope.task.remove().then(function() {
+          console.log("removed");
+          $scope.state.go('tasks.index');
+        });
+        $scope.state.go('tasks.index');
+      };
     })
   .controller(
     'TasksEditController',
     function(
       $scope,
-      $state,
       $stateParams,
       Restangular) {
       console.log("show");
@@ -115,7 +123,7 @@ angular
       $scope.save = function() {
         var task = $scope.task;
         var fn = function(task) {
-          $state.go('tasks.show', { taskId: task.id });
+          $scope.state.go('tasks.show', { taskId: task.id });
         };
         if (task.id) {
           task.save().then(fn);
@@ -129,9 +137,9 @@ angular
       $scope.cancel = function() {
         var task = $scope.task;
         if (task.id) {
-          $state.go('tasks.show', { taskId: task.id });
+          $scope.state.go('tasks.show', { taskId: task.id });
         } else {
-          $state.go('tasks.index');
+          $scope.state.go('tasks.index');
         }
       };
     });
