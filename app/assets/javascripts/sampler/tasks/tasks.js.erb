@@ -96,11 +96,13 @@ angular
       }
 
       $scope.deleteTask = function() {
-        $scope.task.remove().then(function() {
-          console.log("removed");
+        if (window.confirm("Delete " + $scope.task.name)) {
+          $scope.task.remove().then(function() {
+            console.log("removed");
+            $scope.state.go('tasks.index');
+          });
           $scope.state.go('tasks.index');
-        });
-        $scope.state.go('tasks.index');
+        }
       };
     })
   .controller(
