@@ -16,11 +16,14 @@ angular
   .config(function(
     $httpProvider,
     $locationProvider,
+    RestangularProvider,
     $stateProvider,
     $urlRouterProvider,
     authProvider) {
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
     $locationProvider.html5Mode(true);
+
+    RestangularProvider.setDefaultHttpFields({withCredentials: true});
 
     authProvider.register('basic', {
       strategy: 'basic'

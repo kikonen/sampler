@@ -3,7 +3,10 @@ angular
   .module('sampler.auth', ['ng-auth'] )
   .factory(
     "AuthenticationService",
-    function($http, $cookies, $cookieStore, auth) {
+    function(
+      Restangular,
+      $cookieStore,
+      auth) {
       var basic = auth.get('basic');
 
       var state = {
@@ -13,37 +16,41 @@ angular
       };
 
       function login(username, password) {
+        console.log("login");
         console.log(state);
         $cookieStore.remove('auth_token');
         state.username = username;
 
         basic.credentials(username, password);
-        var url = "" + state.url + state.api;
-        console.log("login: " + url);
 
-        basic.$http({method: 'GET', url: url, withCredentials: true, Authentication: 'xxx:yyy'})
-          .success(function(data, status, headers, config) {
-            console.log(status);
-            console.log($cookies);
-          })
-          .error(function(data, status, headers, config) {
-            console.log(status);
+        Restangular.setBaseUrl(state.url);
+        Restangular.one(state.api).get().then(
+          function(auth) {
+            console.log("login: OK");
+            basic.forgetCredentials();
+            console.log(auth);
+          },
+          function(data, status, headers, config) {
             console.log("login: FAIL");
+            basic.forgetCredentials();
+            console.log(status);
           });
       };
 
       function logout() {
-        var url = state.url + state.api;
-        console.log("logout: " + url);
+        console.log("logout");
+        console.log(state);
 
-        basic.$http({method: 'DELETE', url: url})
-          .success(function(data, status, headers, config) {
-            $cookieStore.remove('auth_token');
+        Restangular.setBaseUrl(state.url);
+
+        Restangular.one(state.api).remove().then(
+          function(auth) {
             basic.forgetCredentials();
-          })
-          .error(function(data, status, headers, config) {
             $cookieStore.remove('auth_token');
+          },
+          function(data, status, headers, config) {
             basic.forgetCredentials();
+            $cookieStore.remove('auth_token');
           });
       };
 
