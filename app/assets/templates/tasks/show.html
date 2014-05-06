@@ -1,9 +1,12 @@
 <div>
-  Show
-  <hr>
-  <b>Status:</b> {{ api.status }} <br>
-  <b>Data:</b> {{ api.data }} <br>
-  <b>Headers:</b> {{ api.headers }} <br>
-  <b>Config:</b> {{ api.config }} <br>
-  <hr>
+  <h2>Show</h2>
+  <form>
+    <label>Id: </label> <input type="text" ng-model="task.id"><br>
+    <label>Name: </label> <input type="text" ng-model="task.name"><br>
+    <label>Message: </label> <input type="text" ng-model="task.message"><br>
+    <label>Done: </label> <input type="text" ng-model="task.done"><br>
+
+    <button class="btn btn-primary" ui-sref="tasks.edit({taskId:task.id})">Edit</button>
+    <button class="btn" ui-sref="tasks.index">Back</button>
+  </form>
 </div>

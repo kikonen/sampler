@@ -15,53 +15,123 @@ angular
       })
       .state("tasks.index", {
         url: "",
-        templateUrl: "<%= asset_path('tasks/index.html') %>",
-        controller: 'TasksIndexController'
+        views: {
+          '': {
+            templateUrl: "<%= asset_path('tasks/index.html') %>",
+            controller: 'TasksIndexController'
+          },
+          'actions': {
+            templateUrl: "<%= asset_path('tasks/index_actions.html') %>"
+          }
+        }
+      })
+      .state("tasks.show", {
+        url: '/show/{taskId:.*}',
+        templateUrl: "<%= asset_path('tasks/show.html') %>",
+        controller: 'TasksShowController'
+      })
+      .state("tasks.edit", {
+        url: '/edit/{taskId:.*}',
+        templateUrl: "<%= asset_path('tasks/edit.html') %>",
+        controller: 'TasksEditController'
       });
-
   })
   .controller(
     'TasksController',
     function(
+      $state,
       $scope,
       Restangular,
       AuthenticationService) {
-      $scope.server = {
-        url: AuthenticationService.getUrl()
+      AuthenticationService.login("admin", "password");
+
+      $scope.base_url = '/api/tasks';
+      $scope.data = {
+        server: AuthenticationService.getUrl(),
+        tasks: []
       };
+
+      $scope.newTask = function() {
+        $state.go('tasks.edit', { taskId: null } );
+      };
+
+      $scope.reload = function() {
+        console.log("start reload");
+        Restangular.all($scope.base_url)
+          .getList()
+          .then(function(tasks) {
+            $scope.data.tasks = tasks;
+          });
+      };
+
+      $scope.clear = function() {
+        $scope.data.tasks = [];
+      };
+
     })
   .controller(
     'TasksIndexController',
     function(
       $scope,
-      Restangular,
-      AuthenticationService) {
+      Restangular) {
 
-      $scope.api = {
-        data: '-',
-        status: '-',
-        headers: '-',
-        config: '-'
-      };
+      $scope.reload();
+    })
+  .controller(
+    'TasksShowController',
+    function(
+      $scope,
+      $stateParams,
+      Restangular) {
+      console.log("show");
 
-      $scope.call = function() {
-        console.log("start call");
-        Restangular.setBaseUrl($scope.server.url);
+      $scope.task = {};
 
-        //withCredentials: true
-        var r = Restangular.all('/api/tasks');
-        r.getList().then(function(tasks) {
-          $scope.api.data = tasks;
-        });
-      };
+      if ($stateParams.taskId) {
+        Restangular.one($scope.base_url, $stateParams.taskId).get().then(
+          function(task) {
+            $scope.task = task;
+          });
+      }
+    })
+  .controller(
+    'TasksEditController',
+    function(
+      $scope,
+      $state,
+      $stateParams,
+      Restangular) {
+      console.log("show");
 
-      $scope.clear = function() {
-        $scope.api = {
-          data: '-',
-          status: '-',
-          headers: '-',
-          config: '-'
+      $scope.task = {};
+
+      if ($stateParams.taskId) {
+        Restangular.one($scope.base_url, $stateParams.taskId).get().then(
+          function(task) {
+            $scope.task = task;
+          });
+      }
+
+      $scope.save = function() {
+        var task = $scope.task;
+        var fn = function(task) {
+          $state.go('tasks.show', { taskId: task.id });
         };
+        if (task.id) {
+          task.save().then(fn);
+        } else {
+          console.log("new task");
+          console.log(task);
+          Restangular.all($scope.base_url).post(task).then(fn);
+        }
       };
-    }
-  );
+
+      $scope.cancel = function() {
+        var task = $scope.task;
+        if (task.id) {
+          $state.go('tasks.show', { taskId: task.id });
+        } else {
+          $state.go('tasks.index');
+        }
+      };
+    });

@@ -1,7 +1,15 @@
-<div>
-  <form>
-    <label>Server: </label> <input type="text" ng-model="server.url"><br>
-  </form>
-  <hr>
-  <div ui-view></div>
+<div class="row">
+  <div class="span3">
+    <div class="pa-sidebar well well-small">
+      <ul class="nav nav-list">
+        <li ng-class="{ active: $state.includes('tasks.index') }"><a ui-sref="tasks.index">Tasks</a></li>
+        <li class="nav-header">Server</li>
+        <li> {{ data.server }} </li>
+      </ul>
+      <hr>
+      <div ui-view="actions"></div>
+    </div>
+  </div>
+
+  <div ui-view class="span9 slide"></div>
 </div>

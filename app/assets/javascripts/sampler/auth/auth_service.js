@@ -10,7 +10,7 @@ angular
       var basic = auth.get('basic');
 
       var state = {
-        url: 'http://localhost:3000',
+        url: 'http://localhost:3001',
         api: '/auth/token',
         username: ''
       };
