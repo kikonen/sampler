@@ -7,13 +7,26 @@ angular
   .module('sampler.tasks', ['ui.router', 'sampler.auth'])
   .config(function($stateProvider) {
     $stateProvider
-      .state("tasks", {
+      .state("root.tasks", {
         abstract: true,
         url: "/tasks",
-        templateUrl: "<%= asset_path('tasks/tasks.html') %>",
-        controller: 'TasksController'
+        views: {
+          '': {
+            templateUrl: "<%= asset_path('tasks/tasks.html') %>",
+            controller: 'TasksController'
+          },
+          'current_user': {
+            template: '<b>{{ user }}</b>',
+            controller: function($scope, AuthenticationService) {
+              $scope.user = AuthenticationService.getUser();
+              $scope.$watch("AuthenticationService.getUser()", function() {
+                $scope.user = AuthenticationService.getUser();
+              });
+            }
+          }
+        }
       })
-      .state("tasks.index", {
+      .state("root.tasks.index", {
         url: "",
         views: {
           '': {
@@ -25,12 +38,12 @@ angular
           }
         }
       })
-      .state("tasks.show", {
+      .state("root.tasks.show", {
         url: '/show/{taskId:.*}',
         templateUrl: "<%= asset_path('tasks/show.html') %>",
         controller: 'TasksShowController'
       })
-      .state("tasks.edit", {
+      .state("root.tasks.edit", {
         url: '/edit/{taskId:.*}',
         templateUrl: "<%= asset_path('tasks/edit.html') %>",
         controller: 'TasksEditController'
@@ -44,8 +57,10 @@ angular
       Restangular,
       AuthenticationService) {
       AuthenticationService.login("admin", "password");
+      console.log(AuthenticationService.getUser());
 
       $scope.state = $state;
+      $scope.user = AuthenticationService.getUser();
       $scope.base_url = '/api/tasks';
       $scope.data = {
         server: AuthenticationService.getUrl(),
@@ -53,7 +68,7 @@ angular
       };
 
       $scope.newTask = function() {
-        $scope.state.go('tasks.edit', { taskId: null } );
+        $scope.state.go('root.tasks.edit', { taskId: null } );
       };
 
       $scope.reload = function() {
@@ -99,9 +114,9 @@ angular
         if (window.confirm("Delete " + $scope.task.name)) {
           $scope.task.remove().then(function() {
             console.log("removed");
-            $scope.state.go('tasks.index');
+            $scope.state.go('^.index');
           });
-          $scope.state.go('tasks.index');
+          $scope.state.go('^.index');
         }
       };
     })
@@ -125,7 +140,7 @@ angular
       $scope.save = function() {
         var task = $scope.task;
         var fn = function(task) {
-          $scope.state.go('tasks.show', { taskId: task.id });
+          $scope.state.go('^.show', { taskId: task.id });
         };
         if (task.id) {
           task.save().then(fn);
@@ -139,9 +154,9 @@ angular
       $scope.cancel = function() {
         var task = $scope.task;
         if (task.id) {
-          $scope.state.go('tasks.show', { taskId: task.id });
+          $scope.state.go('^.show', { taskId: task.id });
         } else {
-          $scope.state.go('tasks.index');
+          $scope.state.go('^.index');
         }
       };
     });

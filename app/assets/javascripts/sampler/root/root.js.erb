@@ -1,0 +1,29 @@
+//= depend_on_asset "root/current_user.html"
+"use strict";
+angular
+  .module('sampler.root', ['ui.router'])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("root", {
+        abstract: true,
+        url: "",
+        views: {
+          '': {
+            template: '<ui-view/>'
+          },
+          'current_user@': {
+            templateUrl: "<%= asset_path('root/current_user.html') %>",
+            controller: function($scope, AuthenticationService) {
+              console.log("setup root");
+              $scope.user = null;
+              $scope.$watch(
+                function() { return AuthenticationService.getUser(); },
+                function() {
+                  $scope.user = AuthenticationService.getUser();
+                  console.log("changed: " + $scope.user);
+                });
+            }
+          }
+        }
+      });
+  });

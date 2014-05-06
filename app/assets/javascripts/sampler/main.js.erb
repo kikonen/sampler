@@ -7,9 +7,12 @@ angular
     'ngCookies',
     'ng-auth',
     'ng-auth.strategies.basic',
+    'sampler.root',
     'sampler.home',
     'sampler.login',
-    'sampler.tasks'])
+    'sampler.user',
+    'sampler.tasks'
+  ])
   .run(function ($rootScope,   $state,   $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
@@ -37,7 +40,7 @@ angular
       .otherwise('/home');
 
     $stateProvider
-      .state('about', {
+      .state('root.about', {
         url: '/about',
         templateUrl: "<%= asset_path('about.html') %>"
       });

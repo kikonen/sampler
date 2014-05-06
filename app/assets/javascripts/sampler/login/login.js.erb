@@ -4,7 +4,7 @@ angular
   .module('sampler.login', ['ui.router', 'sampler.auth'])
   .config(function($stateProvider) {
     $stateProvider
-      .state("login", {
+      .state("root.login", {
         url: "/login",
         templateUrl: "<%= asset_path('login/login.html') %>",
         controller: 'LoginController'

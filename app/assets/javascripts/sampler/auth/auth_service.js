@@ -12,7 +12,7 @@ angular
       var state = {
         url: 'http://localhost:3001',
         api: '/auth/token',
-        username: ''
+        username: null
       };
 
       function login(username, password) {
@@ -51,6 +51,7 @@ angular
           function(data, status, headers, config) {
             basic.forgetCredentials();
             $cookieStore.remove('auth_token');
+            state.username = null;
           });
       };
 
@@ -64,6 +65,9 @@ angular
         },
         getApi: function() {
           return state.api;
+        },
+        getUser: function() {
+          return state.username;
         },
         login: login,
         logout: logout

@@ -4,7 +4,7 @@ angular
   .module('sampler.hello', ['ui.router', 'sampler.auth'])
   .config(function($stateProvider) {
     $stateProvider
-      .state("hello", {
+      .state("root.hello", {
         url: "/hello",
         templateUrl: "<%= asset_path('hello/hello.html') %>",
         controller: 'HelloController'

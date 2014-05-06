@@ -10,16 +10,16 @@
 <body>
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" ui-sref="home">Home</a>
+      <div class="container-fluid">
+        <a class="brand" ui-sref="root.home">Home</a>
         <ul class="nav">
-          <li ui-sref-active="active"><a ui-sref="login">Login</a></li>
-          <li ng-class="{active: $state.includes('hello')}"><a ui-sref="hello">Hello</a></li>
-          <li ui-sref-active="active"><a ui-sref="tasks.index">Tasks</a></li>
-          <li ui-sref-active="active"><a ui-sref="about">About</a></li>
+          <li ui-sref-active="active"><a ui-sref="root.login">Login</a></li>
+          <li ng-class="{active: $state.includes('root.hello')}"><a ui-sref="root.hello">Hello</a></li>
+          <li ui-sref-active="active"><a ui-sref="root.tasks.index">Tasks</a></li>
+          <li ui-sref-active="active"><a ui-sref="root.about">About</a></li>
         </ul>
 
-        <p ui-view="hint" class="navbar-text pull-right"></p>
+        <p ui-view="current_user" class="navbar-text pull-right"></p>
       </div>
     </div>
   </div>

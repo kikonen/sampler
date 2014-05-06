@@ -2,7 +2,7 @@
   <h2>All Tasks</h2>
   <ul>
     <li ng-repeat="task in data.tasks">
-      <a ui-sref="tasks.show({taskId:task.id})">{{ task.id }} - {{ task.name }} - {{ task.message }} - {{ task.done }}</a>
+      <a ui-sref="root.tasks.show({taskId:task.id})">{{ task.id }} - {{ task.name }} - {{ task.message }} - {{ task.done }}</a>
     </li>
   </ul>
   <div ng-hide="data.tasks">No tasks loaded</div>

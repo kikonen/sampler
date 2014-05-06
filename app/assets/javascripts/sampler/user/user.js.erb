@@ -1,0 +1,22 @@
+//= depend_on_asset "user/show.html"
+"use strict";
+angular
+  .module('sampler.user', ['ui.router', 'sampler.auth'])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("root.user", {
+        url: "/user",
+        templateUrl: "<%= asset_path('user/show.html') %>",
+        controller: 'UserController'
+      });
+  })
+  .controller(
+    'UserController',
+    function(
+      $scope,
+      $http,
+      AuthenticationService) {
+      $scope.user = {
+        name: AuthenticationService.getUser()
+      };
+    });
