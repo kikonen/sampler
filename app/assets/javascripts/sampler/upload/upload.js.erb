@@ -25,7 +25,8 @@ angular
 
       $scope.flow_setup = function() {
         return {
-          target: $scope.base_url
+          target: $scope.base_url,
+          withCredentials: true
         };
       };
     });
