@@ -1,3 +1,4 @@
+//= depend_on_asset "root/root.html"
 //= depend_on_asset "root/current_user.html"
 "use strict";
 angular
@@ -9,7 +10,7 @@ angular
         url: "",
         views: {
           '': {
-            template: '<ui-view/>'
+            templateUrl: "<%= asset_path('root/root.html') %>"
           },
           'current_user@': {
             templateUrl: "<%= asset_path('root/current_user.html') %>",

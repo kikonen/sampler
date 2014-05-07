@@ -10,21 +10,8 @@ angular
       .state("root.tasks", {
         abstract: true,
         url: "/tasks",
-        views: {
-          '': {
-            templateUrl: "<%= asset_path('tasks/tasks.html') %>",
-            controller: 'TasksController'
-          },
-          'current_user': {
-            template: '<b>{{ user }}</b>',
-            controller: function($scope, AuthenticationService) {
-              $scope.user = AuthenticationService.getUser();
-              $scope.$watch("AuthenticationService.getUser()", function() {
-                $scope.user = AuthenticationService.getUser();
-              });
-            }
-          }
-        }
+        templateUrl: "<%= asset_path('tasks/tasks.html') %>",
+        controller: 'TasksController'
       })
       .state("root.tasks.index", {
         url: "",
@@ -57,10 +44,8 @@ angular
       Restangular,
       AuthenticationService) {
       AuthenticationService.login("admin", "password");
-      console.log(AuthenticationService.getUser());
 
       $scope.state = $state;
-      $scope.user = AuthenticationService.getUser();
       $scope.base_url = '/api/tasks';
       $scope.data = {
         server: AuthenticationService.getUrl(),

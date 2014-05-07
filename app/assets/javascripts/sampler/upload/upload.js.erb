@@ -1,0 +1,31 @@
+//= depend_on_asset "upload/upload.html"
+"use strict";
+angular
+  .module('sampler.upload', [
+    'ui.router',
+    'sampler.auth',
+    'angularFileUpload'
+  ])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("root.upload", {
+        url: "/upload",
+        templateUrl: "<%= asset_path('upload/upload.html') %>",
+        controller: 'UploadController'
+      });
+  })
+  .controller(
+    'UploadController',
+    function(
+      $state,
+      $scope,
+      AuthenticationService) {
+      $scope.base_url = AuthenticationService.getUrl() + '/api/upload';
+      console.log($scope.base_url);
+
+      $scope.flow_setup = function() {
+        return {
+          target: $scope.base_url
+        };
+      };
+    });
