@@ -8,6 +8,8 @@
     "angular-resource": "latest",
     "angular-ui-router": "latest",
     "angular-route": "latest",
-    "restangular": "latest"
+    "restangular": "latest",
+    "ng-table": "latest",
+    "ng-flow": "latest"
   }
 }
