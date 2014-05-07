@@ -25,4 +25,6 @@
 //= require angular-cookies/angular-cookies.min.js
 //= require ng-auth/dist/ng-auth.min.js
 //= require ng-auth/dist/ng-auth-basic.min.js
+//= require ng-table/ng-table.min.js
+//= require ng-flow/dist/ng-flow.min.js
 //= require_tree .

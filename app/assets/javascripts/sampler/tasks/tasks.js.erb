@@ -71,11 +71,15 @@ angular
         $scope.state.go('root.tasks.edit', { taskId: null } );
       };
 
-      $scope.reload = function() {
-        console.log("start reload");
+      $scope.fetchTasks = function(fn) {
         Restangular.all($scope.base_url)
           .getList()
-          .then(function(tasks) {
+          .then(fn);
+      };
+
+      $scope.reload = function() {
+        console.log("start reload");
+        $scope.fetchTasks(function(tasks) {
             $scope.data.tasks = tasks;
           });
       };
@@ -83,15 +87,47 @@ angular
       $scope.clear = function() {
         $scope.data.tasks = [];
       };
-
     })
   .controller(
     'TasksIndexController',
     function(
       $scope,
-      Restangular) {
+      $filter,
+      Restangular,
+      ngTableParams) {
 
-      $scope.reload();
+      $scope.tableParams = new ngTableParams(
+        {
+          page: 1,
+          count: 5,
+          sorting: {
+            name: 'asc'
+          }
+        },
+        {
+          total: function () {
+            return $scope.tasks.size();
+          },
+          getData: function($defer, params) {
+            console.log("reload table");
+            $scope.fetchTasks(function(tasks) {
+              $scope.data.tasks = tasks;
+              if (params.filter()) {
+                tasks = $filter('filter')(tasks, params.filter());
+              }
+              if (params.sorting()) {
+                tasks = $filter('orderBy')(tasks, params.orderBy());
+              }
+              var pg = params.page();
+              var count = params.count();
+              $defer.resolve(tasks.slice((pg - 1) * count, pg * count));
+            });
+          }
+        });
+
+      $scope.clear = function() {
+        $scope.data.tasks = [];
+      };
     })
   .controller(
     'TasksShowController',
