@@ -1,0 +1,150 @@
+//= depend_on_asset "task/task.html"
+//= depend_on_asset "task/index.html"
+//= depend_on_asset "task/show.html"
+//= depend_on_asset "task/edit.html"
+"use strict";
+angular
+  .module('sampler.tasks', [
+    'ui.router',
+    'sampler.task.service'
+  ])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state("root.task", {
+        abstract: true,
+        url: "/tasks",
+        templateUrl: "<%= asset_path('task/task.html') %>",
+        controller: 'TasksController'
+      })
+      .state("root.task.index", {
+        url: "",
+        views: {
+          '': {
+            templateUrl: "<%= asset_path('task/index.html') %>",
+            controller: 'TasksIndexController'
+          },
+          'actions': {
+            templateUrl: "<%= asset_path('task/index_actions.html') %>"
+          }
+        }
+      })
+      .state("root.task.show", {
+        url: '/show/{taskId:.*}',
+        templateUrl: "<%= asset_path('task/show.html') %>",
+        controller: 'TasksShowController'
+      })
+      .state("root.task.edit", {
+        url: '/edit/{taskId:.*}',
+        templateUrl: "<%= asset_path('task/edit.html') %>",
+        controller: 'TasksEditController'
+      });
+  })
+  .controller(
+    'TasksController',
+    function(
+      $scope,
+      $state,
+      TaskService) {
+
+      $scope.data = {
+        tasks: []
+      };
+
+      $scope.newTask = function() {
+        $scope.state.go('root.task.edit', { taskId: null } );
+      };
+
+      $scope.reload = function() {
+        console.log("start reload");
+        $scope.fetchTasks(function(tasks) {
+            $scope.data.tasks = tasks;
+          });
+      };
+
+      $scope.clear = function() {
+        $scope.data.tasks = [];
+      };
+    })
+  .controller(
+    'TasksIndexController',
+    function(
+      $scope,
+      $filter,
+      Restangular,
+      ngTableParams,
+      TaskService) {
+
+      $scope.tableParams = new ngTableParams(
+        {
+          page: 1,
+          count: 5,
+          sorting: {
+            name: 'asc'
+          }
+        },
+        {
+          getData: TaskService.tableAll
+        });
+
+      $scope.clear = function() {
+        $scope.data.tasks = [];
+      };
+    })
+  .controller(
+    'TasksShowController',
+    function(
+      $scope,
+      $state,
+      $stateParams,
+      TaskService) {
+      console.log("show");
+
+      $scope.task = {};
+
+      TaskService.one($stateParams.taskId, function(task) {
+        $scope.task = task;
+      });
+
+      $scope.deleteTask = function() {
+        if (window.confirm("Delete " + $scope.task.name)) {
+          TaskService.delete($scope.task, function(task) {
+            $state.go('^.index');
+          });
+        }
+      };
+    })
+  .controller(
+    'TasksEditController',
+    function(
+      $scope,
+      $state,
+      $stateParams,
+      TaskService) {
+      console.log("show");
+
+      $scope.task = {};
+
+      var fn = function(task) {
+        $scope.task = task;
+      };
+      if ($stateParams.taskId) {
+        TaskService.one($stateParams.taskId, fn);
+      } else {
+        TaskService.create(fn);
+      }
+
+      $scope.save = function() {
+        TaskService.save($scope.task, function(task) {
+          $state.go('^.show', { taskId: task.id });
+        });
+      };
+
+      $scope.cancel = function() {
+        var task = $scope.task;
+        if (task.id) {
+          $state.go('^.show', { taskId: task.id });
+        } else {
+          $state.state.go('^.index');
+        }
+      };
+    });

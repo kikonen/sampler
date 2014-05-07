@@ -4,7 +4,7 @@
     <table ng-table="tableParams" show-filter="true" class="table">
     <tr ng-repeat="task in $data">
       <td data-title="'Id'">{{task.id}}</td>
-      <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }"><a ui-sref="root.tasks.show({taskId:task.id})">{{ task.name }}</a></td>
+      <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }"><a ui-sref="root.task.show({taskId:task.id})">{{ task.name }}</a></td>
       <td data-title="'Message'" sortable="'message'"">{{ task.message }}</td>
       <td data-title="'Done'" sortable="'done'">{{ task.done }}</td>
     </tr>
