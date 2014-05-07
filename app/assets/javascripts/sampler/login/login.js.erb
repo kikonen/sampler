@@ -1,7 +1,10 @@
 //= depend_on_asset "login/login.html"
 "use strict";
 angular
-  .module('sampler.login', ['ui.router', 'sampler.auth'])
+  .module('sampler.login', [
+    'ui.router',
+    'sampler.auth'
+  ])
   .config(function($stateProvider) {
     $stateProvider
       .state("root.login", {

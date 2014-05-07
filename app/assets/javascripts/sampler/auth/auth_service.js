@@ -1,6 +1,15 @@
 "use strict";
 angular
-  .module('sampler.auth', ['ng-auth'] )
+  .module('sampler.auth', [
+    'ng-auth',
+    'ng-auth.strategies.basic'
+  ])
+  .config(function(
+    authProvider) {
+    authProvider.register('basic', {
+      strategy: 'basic'
+    });
+  })
   .factory(
     "AuthenticationService",
     function(

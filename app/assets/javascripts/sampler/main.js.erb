@@ -5,10 +5,7 @@ angular
     'ngAnimate',
     'restangular',
     'ngCookies',
-    'ng-auth',
-    'ng-auth.strategies.basic',
     'ngTable',
-    'flow',
     'sampler.modules'
   ])
   .run(function ($rootScope,   $state,   $stateParams) {
@@ -20,16 +17,11 @@ angular
     $locationProvider,
     RestangularProvider,
     $stateProvider,
-    $urlRouterProvider,
-    authProvider) {
+    $urlRouterProvider) {
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
     $locationProvider.html5Mode(true);
 
     RestangularProvider.setDefaultHttpFields({withCredentials: true});
-
-    authProvider.register('basic', {
-      strategy: 'basic'
-    });
 
     $urlRouterProvider
       .when("/?path", ['$match', function ($match) {

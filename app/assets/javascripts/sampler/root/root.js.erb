@@ -2,7 +2,9 @@
 //= depend_on_asset "root/current_user.html"
 "use strict";
 angular
-  .module('sampler.root', ['ui.router'])
+  .module('sampler.root', [
+    'ui.router'
+  ])
   .config(function($stateProvider) {
     $stateProvider
       .state("root", {
