@@ -8,7 +8,7 @@ angular
     'sampler.home',
     'sampler.login',
     'sampler.root',
-    'sampler.tasks',
+    'sampler.task',
     'sampler.user',
     'sampler.upload'
   ]);
