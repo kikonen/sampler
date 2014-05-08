@@ -22,8 +22,9 @@ angular
     function(
       $state,
       $scope,
+      Server,
       Authentication) {
-      $scope.base_url = Authentication.getUrl() + '/api/upload';
+      $scope.base_url = Server.get() + '/api/upload';
       console.log($scope.base_url);
 
       $scope.flow_setup = function() {
