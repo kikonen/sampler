@@ -1,0 +1,9 @@
+div class="row"
+  div class="span3"
+    div class="pa-sidebar well well-small"
+      ul class="nav nav-list"
+        li ng-class="{ active: $state.includes('root.task.index') }"
+          a ui-sref="root.task.index" Tasks
+      hr
+      div ui-view="actions"
+  div[ui-view class="span9 slide"]

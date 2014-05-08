@@ -1,0 +1,20 @@
+div
+  form
+    label Server:
+    input type="text" ng-model="server.url"
+    br
+
+    label Login API:
+    input type="text" ng-model="server.api"
+    br
+
+    label Username:
+    input type="text" ng-model="user.username"
+    br
+
+    label Password:
+    input type="password" ng-model="user.password"
+    br
+
+    button class="btn btn-primary" ng-click="login()" Login
+    button class="btn" ng-click="logout()" Logout

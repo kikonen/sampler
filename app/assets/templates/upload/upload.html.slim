@@ -1,0 +1,19 @@
+div
+  h2 Upload
+
+  div[flow-init="flow_setup()"
+    flow-files-submitted="$flow.upload()"
+    flow-file-success="$file.msg = $message"]
+
+    input[type="file" flow-btn]
+
+    table
+      tr ng-repeat="file in $flow.files"
+        td ng-bind="$index + 1"
+        td ng-bind="file.name"
+        td ng-bind="file.msg"
+
+  form
+    h2 AWS upload test
+    label File:
+    input type="file" ng-file-select="onFileSelect($files)"

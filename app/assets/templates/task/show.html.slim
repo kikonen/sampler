@@ -1,0 +1,23 @@
+div
+  h2
+Show
+  form
+    label Id:
+    input type="text" ng-model="task.id"
+    br
+
+    label Name:
+    input type="text" ng-model="task.name"
+    br
+
+    label Message:
+    input type="text" ng-model="task.message"
+    br
+
+    label Done:
+    input type="text" ng-model="task.done"
+    br
+
+    button class="btn btn-primary" ui-sref="root.task.edit({taskId:task.id})" Edit
+    button class="btn" ui-sref="root.task.index" Back
+    button class="btn btn-danger" ng-click="deleteTask()" Delete

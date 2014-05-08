@@ -1,0 +1,21 @@
+div
+  h2 Show
+  form
+    label Id:
+    input type="text" ng-model="task.id"
+    br
+
+    label Name:
+    input type="text" ng-model="task.name"
+    br
+
+    label Message:
+    input type="text" ng-model="task.message"
+    br
+
+    label Done:
+    input type="text" ng-model="task.done"
+    br
+
+    button class="btn btn-primary" ng-click="save()" Save
+    button class="btn" ng-click="cancel()" Cancel

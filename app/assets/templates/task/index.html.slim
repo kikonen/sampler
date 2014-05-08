@@ -1,0 +1,14 @@
+div
+  h2 All Tasks
+  ul
+    table ng-table="tableParams" show-filter="true" class="table"
+      tr ng-repeat="task in $data"
+        td data-title="'Id'" {{task.id}}
+        td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }"
+          a ui-sref="root.task.show({taskId:task.id})"
+            | {{ task.name }}
+        td[data-title="'Message'" sortable="'message'"]
+          | {{ task.message }}
+        td data-title="'Done'" sortable="'done'"
+          | {{ task.done }}
+  div ng-hide="data.tasks" No tasks loaded
