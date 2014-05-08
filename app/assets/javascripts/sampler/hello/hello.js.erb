@@ -1,23 +1,29 @@
 //= depend_on_asset "hello/hello.html"
 "use strict";
 angular
-  .module('sampler.hello', ['ui.router', 'sampler.auth'])
+  .module('sampler.hello', [
+    'ui.router'
+  ])
   .config(function($stateProvider) {
-    $stateProvider
-      .state("root.hello", {
+    [
+      {
+        name: "root.hello",
         url: "/hello",
         templateUrl: "<%= asset_path('hello/hello.html') %>",
-        controller: 'HelloController'
-      });
+        controller: 'Hello'
+      }
+    ].forEach(function(state) {
+      $stateProvider.state(state);
+    });
   })
   .controller(
-    'HelloController',
+    'Hello',
     function(
       $scope,
       $http,
-      AuthenticationService) {
+      Server) {
     $scope.server = {
-      url: AuthenticationService.getUrl(),
+      url: Server.get(),
       method: 'GET',
       api: '/api/test',
       payload: ''

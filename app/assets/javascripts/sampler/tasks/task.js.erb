@@ -9,38 +9,45 @@ angular
     'sampler.task.service'
   ])
   .config(function($stateProvider) {
-    $stateProvider
-      .state("root.task", {
+    [
+      {
+        name: "root.task",
         abstract: true,
         url: "/tasks",
         templateUrl: "<%= asset_path('task/task.html') %>",
-        controller: 'TasksController'
-      })
-      .state("root.task.index", {
+        controller: 'Task'
+      },
+      {
+        name: "root.task.index",
         url: "",
         views: {
           '': {
             templateUrl: "<%= asset_path('task/index.html') %>",
-            controller: 'TasksIndexController'
+            controller: 'TaskIndex'
           },
           'actions': {
             templateUrl: "<%= asset_path('task/index_actions.html') %>"
           }
         }
-      })
-      .state("root.task.show", {
+      },
+      {
+        name: "root.task.show",
         url: '/show/{taskId:.*}',
         templateUrl: "<%= asset_path('task/show.html') %>",
-        controller: 'TasksShowController'
-      })
-      .state("root.task.edit", {
+        controller: 'TaskShow'
+      },
+      {
+        name: "root.task.edit",
         url: '/edit/{taskId:.*}',
         templateUrl: "<%= asset_path('task/edit.html') %>",
-        controller: 'TasksEditController'
-      });
+        controller: 'TaskEdit'
+      }
+    ].forEach(function(state) {
+      $stateProvider.state(state);
+    });
   })
   .controller(
-    'TasksController',
+    'Task',
     function(
       $scope,
       $state,
@@ -66,7 +73,7 @@ angular
       };
     })
   .controller(
-    'TasksIndexController',
+    'TaskIndex',
     function(
       $scope,
       $filter,
@@ -91,7 +98,7 @@ angular
       };
     })
   .controller(
-    'TasksShowController',
+    'TaskShow',
     function(
       $scope,
       $state,
@@ -114,7 +121,7 @@ angular
       };
     })
   .controller(
-    'TasksEditController',
+    'TaskEdit',
     function(
       $scope,
       $state,

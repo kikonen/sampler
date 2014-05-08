@@ -1,14 +1,12 @@
 "use strict";
 angular
   .module('sampler.task.service', [
-    'sampler.auth'
   ])
   .factory(
     'TaskService',
     function(
       $filter,
-      Restangular,
-      AuthenticationService) {
+      Restangular) {
 
       var state = {
         base_url: '/api/tasks'

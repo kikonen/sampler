@@ -3,24 +3,27 @@
 angular
   .module('sampler.upload', [
     'ui.router',
-    'flow',
-    'sampler.auth'
+    'flow'
   ])
   .config(function($stateProvider) {
-    $stateProvider
-      .state("root.upload", {
+    [
+      {
+        name: "root.upload",
         url: "/upload",
         templateUrl: "<%= asset_path('upload/upload.html') %>",
-        controller: 'UploadController'
-      });
+        controller: 'Upload'
+      }
+    ].forEach(function(state) {
+      $stateProvider.state(state);
+    });
   })
   .controller(
-    'UploadController',
+    'Upload',
     function(
       $state,
       $scope,
-      AuthenticationService) {
-      $scope.base_url = AuthenticationService.getUrl() + '/api/upload';
+      Authentication) {
+      $scope.base_url = Authentication.getUrl() + '/api/upload';
       console.log($scope.base_url);
 
       $scope.flow_setup = function() {

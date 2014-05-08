@@ -2,24 +2,27 @@
 "use strict";
 angular
   .module('sampler.user', [
-    'ui.router',
-    'sampler.auth'
+    'ui.router'
   ])
   .config(function($stateProvider) {
-    $stateProvider
-      .state("root.user", {
+    [
+      {
+        name: "root.user",
         url: "/user",
         templateUrl: "<%= asset_path('user/show.html') %>",
-        controller: 'UserController'
-      });
+        controller: 'User'
+      }
+    ].forEach(function(state) {
+      $stateProvider.state(state);
+    });
   })
   .controller(
-    'UserController',
+    'User',
     function(
       $scope,
       $http,
-      AuthenticationService) {
+      Authentication) {
       $scope.user = {
-        name: AuthenticationService.getUser()
+        name: Authentication.getUser()
       };
     });

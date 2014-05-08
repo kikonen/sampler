@@ -1,8 +1,9 @@
 "use strict";
 angular
-  .module('sampler.auth', [
+  .module('sampler.shared.authentication', [
     'ng-auth',
-    'ng-auth.strategies.basic'
+    'ng-auth.strategies.basic',
+    'sampler.shared.server'
   ])
   .config(function(
     authProvider) {
@@ -11,53 +12,46 @@ angular
     });
   })
   .factory(
-    "AuthenticationService",
+    "Authentication",
     function(
       Restangular,
       $cookieStore,
-      auth) {
+      auth,
+      Server) {
       var basic = auth.get('basic');
 
       var state = {
-        url: 'http://localhost:3001',
         api: '/auth/token',
         username: null
       };
 
       function login(username, password) {
         console.log("login");
-        console.log(state);
         $cookieStore.remove('auth_token');
-        state.username = username;
 
         basic.credentials(username, password);
 
-        Restangular.setBaseUrl(state.url);
         Restangular.one(state.api).get().then(
-          function(auth) {
+          function() {
             console.log("login: OK");
+            state.username = username;
             basic.forgetCredentials();
             console.log(auth);
           },
-          function(data, status, headers, config) {
+          function() {
             console.log("login: FAIL");
             basic.forgetCredentials();
-            console.log(status);
           });
       };
 
       function logout() {
         console.log("logout");
-        console.log(state);
-
-        Restangular.setBaseUrl(state.url);
-
         Restangular.one(state.api).remove().then(
-          function(auth) {
+          function() {
             basic.forgetCredentials();
             $cookieStore.remove('auth_token');
           },
-          function(data, status, headers, config) {
+          function() {
             basic.forgetCredentials();
             $cookieStore.remove('auth_token');
             state.username = null;
@@ -65,12 +59,8 @@ angular
       };
 
       return {
-        setServer: function(url, api) {
-          state.url = url;
+        setApi: function(api) {
           state.api = api;
-        },
-        getUrl: function() {
-          return state.url;
         },
         getApi: function() {
           return state.api;

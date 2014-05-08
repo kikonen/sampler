@@ -8,7 +8,7 @@ angular
     'ngTable',
     'sampler.modules'
   ])
-  .run(function ($rootScope,   $state,   $stateParams) {
+  .run(function ($rootScope,   $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
   })
@@ -29,9 +29,13 @@ angular
       }])
       .otherwise('/home');
 
-    $stateProvider
-      .state('root.about', {
+    [
+      {
+        name: 'root.about',
         url: '/about',
         templateUrl: "<%= asset_path('about.html') %>"
-      });
+      }
+    ].forEach(function(state) {
+      $stateProvider.state(state);
+    });
   });

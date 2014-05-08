@@ -2,7 +2,8 @@
 // load all modules needed for "root"
 angular
   .module('sampler.modules', [
-    'sampler.auth',
+    'sampler.shared.server',
+    'sampler.shared.authentication',
     'sampler.hello',
     'sampler.home',
     'sampler.login',

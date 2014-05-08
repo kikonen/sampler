@@ -2,28 +2,31 @@
 "use strict";
 angular
   .module('sampler.login', [
-    'ui.router',
-    'sampler.auth'
+    'ui.router'
   ])
   .config(function($stateProvider) {
-    $stateProvider
-      .state("root.login", {
+    [
+      {
+        name: "root.login",
         url: "/login",
         templateUrl: "<%= asset_path('login/login.html') %>",
-        controller: 'LoginController'
-      });
+        controller: 'Login'
+      }
+    ].forEach(function(state) {
+      $stateProvider.state(state);
+    });
   })
   .controller(
-    'LoginController',
+    'Login',
     function(
       $scope,
       $http,
-      AuthenticationService) {
-      var auth = AuthenticationService;
+      Authentication,
+      Server) {
 
       $scope.server = {
-        url: auth.getUrl(),
-        api: auth.getApi()
+        url: Server.get(),
+        api: Authentication.getApi()
       };
       $scope.user = {
         username: 'admin',
@@ -34,13 +37,14 @@ angular
         var server = $scope.server;
         var user = $scope.user;
 
-        auth.setServer(server.url, server.api);
-        auth.login(
+        Server.set(server.url);
+        Authentication.setApi(server.api);
+        Authentication.login(
           user.username,
           user.password);
       };
 
       $scope.logout = function() {
-        auth.logout();
+        Authentication.logout();
       };
     });

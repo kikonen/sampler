@@ -6,8 +6,9 @@ angular
     'ui.router'
   ])
   .config(function($stateProvider) {
-    $stateProvider
-      .state("root", {
+    [
+      {
+        name: "root",
         abstract: true,
         url: "",
         views: {
@@ -16,17 +17,23 @@ angular
           },
           'current_user@': {
             templateUrl: "<%= asset_path('root/current_user.html') %>",
-            controller: function($scope, AuthenticationService) {
-              console.log("setup root");
-              $scope.user = null;
-              $scope.$watch(
-                function() { return AuthenticationService.getUser(); },
-                function() {
-                  $scope.user = AuthenticationService.getUser();
-                  console.log("changed: " + $scope.user);
-                });
-            }
+            controller: 'CurrentUser'
           }
         }
-      });
-  });
+      }
+    ].forEach(function(state) {
+      $stateProvider.state(state);
+    });
+  })
+  .controller(
+    'CurrentUser',
+    function($scope, Authentication) {
+      console.log("setup root");
+      $scope.user = null;
+      $scope.$watch(
+        function() { return Authentication.getUser(); },
+        function() {
+          $scope.user = Authentication.getUser();
+          console.log("changed: " + $scope.user);
+        });
+    });
