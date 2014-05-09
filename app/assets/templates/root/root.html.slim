@@ -4,7 +4,7 @@ div class="navbar navbar-fixed-top"
       a class="brand" ui-sref="root.home" Home
       ul class="nav"
         li ng-repeat="view in views" ng-class="{active: $state.includes('{{view.root}}')}"
-          a ui-sref="{{view.state}}" ng-bind="view.title"
+          a ui-sref="{{view.root + view.state}}" ng-bind="view.title"
 
       ul class="nav navbar-text pull-right"
         li ng-show="user" ui-sref-active="active"
