@@ -18,6 +18,6 @@ Show
     input type="text" ng-model="task.done"
     br
 
-    button class="btn btn-primary" ui-sref="root.task.edit({taskId:task.id})" Edit
-    button class="btn" ui-sref="root.task.index" Back
+    button class="btn btn-primary" ui-sref="^.edit({taskId:task.id})" Edit
+    button class="btn" ui-sref="^.index" Back
     button class="btn btn-danger" ng-click="deleteTask()" Delete

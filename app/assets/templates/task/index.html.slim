@@ -5,7 +5,7 @@ div
       tr ng-repeat="task in $data"
         td data-title="'Id'" {{task.id}}
         td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }"
-          a ui-sref="root.task.show({taskId:task.id})"
+          a ui-sref="^.show({taskId:task.id})"
             | {{ task.name }}
         td[data-title="'Message'" sortable="'message'"]
           | {{ task.message }}

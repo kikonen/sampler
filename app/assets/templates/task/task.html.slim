@@ -3,7 +3,7 @@ div class="row"
     div class="pa-sidebar well well-small"
       ul class="nav nav-list"
         li ng-class="{ active: $state.includes('root.task.index') }"
-          a ui-sref="root.task.index" Tasks
+          a ui-sref=".index" Tasks
       hr
       div ui-view="actions"
   div[ui-view class="span9 slide"]

@@ -58,7 +58,7 @@ angular
       };
 
       $scope.newTask = function() {
-        $scope.state.go('root.task.edit', { taskId: null } );
+        $scope.state.go('^.edit', { taskId: null } );
       };
 
       $scope.reload = function() {
@@ -151,7 +151,7 @@ angular
         if (task.id) {
           $state.go('^.show', { taskId: task.id });
         } else {
-          $state.state.go('^.index');
+          $state.go('^.index');
         }
       };
     });
