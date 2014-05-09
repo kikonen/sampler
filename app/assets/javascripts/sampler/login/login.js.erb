@@ -5,19 +5,16 @@ angular
     'ui.router'
   ])
   .config(function($stateProvider) {
-    [
-      {
+    $stateProvider
+      .state({
         name: "root.login",
         url: "/login",
         templateUrl: "<%= asset_path('login/login.html') %>",
-        controller: 'root.login'
-      }
-    ].forEach(function(state) {
-      $stateProvider.state(state);
-    });
+        controller: 'sampler.login'
+      });
   })
   .controller(
-    'root.login',
+    'sampler.login',
     function(
       $scope,
       $http,

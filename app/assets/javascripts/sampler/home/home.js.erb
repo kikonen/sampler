@@ -4,19 +4,16 @@ angular
   .module('sampler.home', [
     'ui.router'])
   .config(function($stateProvider) {
-    [
-      {
+    $stateProvider
+      .state({
         name: "root.home",
         url: "/home",
         templateUrl: "<%= asset_path('home/home.html') %>",
-        controller: 'root.home'
-      }
-    ].forEach(function(state) {
-      $stateProvider.state(state);
-    });
+        controller: 'sampler.home'
+      });
   })
   .controller(
-    'root.home',
+    'sampler.home',
     function($scope) {
       $scope.data = {
         message: 'koti'

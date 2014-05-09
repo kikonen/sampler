@@ -5,19 +5,16 @@ angular
     'ui.router'
   ])
   .config(function($stateProvider) {
-    [
-      {
+   $stateProvider
+      .state({
         name: "root.user",
         url: "/user",
         templateUrl: "<%= asset_path('user/show.html') %>",
-        controller: 'root.user'
-      }
-    ].forEach(function(state) {
-      $stateProvider.state(state);
-    });
+        controller: 'sampler.user'
+      });
   })
   .controller(
-    'root.user',
+    'sampler.user',
     function(
       $scope,
       $http,

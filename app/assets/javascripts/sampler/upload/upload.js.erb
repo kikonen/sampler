@@ -6,19 +6,16 @@ angular
     'flow'
   ])
   .config(function($stateProvider) {
-    [
-      {
+   $stateProvider
+      .state({
         name: "root.upload",
         url: "/upload",
         templateUrl: "<%= asset_path('upload/upload.html') %>",
-        controller: 'root.upload'
-      }
-    ].forEach(function(state) {
-      $stateProvider.state(state);
-    });
+        controller: 'sampler.upload'
+      });
   })
   .controller(
-    'root.upload',
+    'sampler.upload',
     function(
       $state,
       $scope,

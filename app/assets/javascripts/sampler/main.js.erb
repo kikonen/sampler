@@ -29,13 +29,10 @@ angular
       }])
       .otherwise('/home');
 
-    [
-      {
+    $stateProvider
+      .state({
         name: 'root.about',
         url: '/about',
         templateUrl: "<%= asset_path('about.html') %>"
-      }
-    ].forEach(function(state) {
-      $stateProvider.state(state);
-    });
+      });
   });
