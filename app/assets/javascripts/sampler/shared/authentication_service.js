@@ -26,19 +26,19 @@ angular
       };
 
       function login(username, password) {
-        console.log("login");
+        var url = Server.get() + state.api;
+        console.log("login: " + url);
         $cookieStore.remove('auth_token');
 
         basic.credentials(username, password);
 
-        Restangular.one(state.api).get().then(
-          function() {
+        basic.$http({method: 'GET', url: url, withCredentials: true})
+          .success(function(data, status, headers, config) {
             console.log("login: OK");
             state.username = username;
             basic.forgetCredentials();
-            console.log(auth);
-          },
-          function() {
+          })
+          .error(function(data, status, headers, config) {
             console.log("login: FAIL");
             basic.forgetCredentials();
           });
