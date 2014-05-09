@@ -9,14 +9,14 @@ angular
         name: "root.home",
         url: "/home",
         templateUrl: "<%= asset_path('home/home.html') %>",
-        controller: 'Home'
+        controller: 'root.home'
       }
     ].forEach(function(state) {
       $stateProvider.state(state);
     });
   })
   .controller(
-    'Home',
+    'root.home',
     function($scope) {
       $scope.data = {
         message: 'koti'

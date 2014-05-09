@@ -10,14 +10,14 @@ angular
         name: "root.login",
         url: "/login",
         templateUrl: "<%= asset_path('login/login.html') %>",
-        controller: 'Login'
+        controller: 'root.login'
       }
     ].forEach(function(state) {
       $stateProvider.state(state);
     });
   })
   .controller(
-    'Login',
+    'root.login',
     function(
       $scope,
       $http,

@@ -11,14 +11,14 @@ angular
         abstract: true,
         url: "",
         templateUrl: "<%= asset_path('root/root.html') %>",
-        controller: 'Root'
+        controller: 'root'
       }
     ].forEach(function(state) {
       $stateProvider.state(state);
     });
   })
   .controller(
-    'Root',
+    'root',
     function($scope, Authentication) {
       console.log("setup root");
       $scope.user = null;

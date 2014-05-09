@@ -10,14 +10,14 @@ angular
         name: "root.hello",
         url: "/hello",
         templateUrl: "<%= asset_path('hello/hello.html') %>",
-        controller: 'Hello'
+        controller: 'root.hello'
       }
     ].forEach(function(state) {
       $stateProvider.state(state);
     });
   })
   .controller(
-    'Hello',
+    'root.hello',
     function(
       $scope,
       $http,

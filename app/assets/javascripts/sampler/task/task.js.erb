@@ -15,7 +15,7 @@ angular
         abstract: true,
         url: "/tasks",
         templateUrl: "<%= asset_path('task/task.html') %>",
-        controller: 'Task'
+        controller: 'task'
       },
       {
         name: "root.task.index",
@@ -23,7 +23,7 @@ angular
         views: {
           '': {
             templateUrl: "<%= asset_path('task/index.html') %>",
-            controller: 'TaskIndex'
+            controller: 'root.task.index'
           },
           'actions': {
             templateUrl: "<%= asset_path('task/index_actions.html') %>"
@@ -34,20 +34,20 @@ angular
         name: "root.task.show",
         url: '/show/{taskId:.*}',
         templateUrl: "<%= asset_path('task/show.html') %>",
-        controller: 'TaskShow'
+        controller: 'root.task.show'
       },
       {
         name: "root.task.edit",
         url: '/edit/{taskId:.*}',
         templateUrl: "<%= asset_path('task/edit.html') %>",
-        controller: 'TaskEdit'
+        controller: 'root.task.edit'
       }
     ].forEach(function(state) {
       $stateProvider.state(state);
     });
   })
   .controller(
-    'Task',
+    'task',
     function(
       $scope,
       $state,
@@ -73,7 +73,7 @@ angular
       };
     })
   .controller(
-    'TaskIndex',
+    'root.task.index',
     function(
       $scope,
       $filter,
@@ -98,7 +98,7 @@ angular
       };
     })
   .controller(
-    'TaskShow',
+    'root.task.show',
     function(
       $scope,
       $state,
@@ -121,7 +121,7 @@ angular
       };
     })
   .controller(
-    'TaskEdit',
+    'root.task.edit',
     function(
       $scope,
       $state,
