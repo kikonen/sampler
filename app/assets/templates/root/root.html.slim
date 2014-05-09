@@ -1,1 +1,20 @@
-div[ui-view]
+div class="navbar navbar-fixed-top"
+  div class="navbar-inner"
+    div class="container-fluid"
+      a class="brand" ui-sref="root.home" Home
+      ul class="nav"
+        li ui-sref-active="active"
+          a ui-sref="root.login" Login
+        li ng-class="{active: $state.includes('root.hello')}"
+          a ui-sref="root.hello" Hello
+        li ui-sref-active="active"
+          a ui-sref="root.task.index" Tasks
+        li ui-sref-active="active"
+          a ui-sref="root.upload" Upload
+        li ui-sref-active="active"
+          a ui-sref="root.about" About
+
+      ul class="nav navbar-text pull-right"
+        li ng-show="user" ui-sref-active="active"
+          a ui-sref="root.user" ng-bind="user"
+div[ui-view class="container-fluid"]

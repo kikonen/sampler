@@ -8,22 +8,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container-fluid">
-        <a class="brand" ui-sref="root.home">Home</a>
-        <ul class="nav">
-          <li ui-sref-active="active"><a ui-sref="root.login">Login</a></li>
-          <li ng-class="{active: $state.includes('root.hello')}"><a ui-sref="root.hello">Hello</a></li>
-          <li ui-sref-active="active"><a ui-sref="root.task.index">Tasks</a></li>
-          <li ui-sref-active="active"><a ui-sref="root.upload">Upload</a></li>
-          <li ui-sref-active="active"><a ui-sref="root.about">About</a></li>
-        </ul>
-
-        <p ui-view="current_user" class="navbar-text pull-right"></p>
-      </div>
-    </div>
-  </div>
-  <div ui-view class="container-fluid" style="padding-top: 60px;"></div>
+  <div ui-view style="padding-top: 60px;"></div>
 </body>
 </html>

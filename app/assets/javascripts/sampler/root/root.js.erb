@@ -1,5 +1,4 @@
 //= depend_on_asset "root/root.html"
-//= depend_on_asset "root/current_user.html"
 "use strict";
 angular
   .module('sampler.root', [
@@ -11,22 +10,15 @@ angular
         name: "root",
         abstract: true,
         url: "",
-        views: {
-          '': {
-            templateUrl: "<%= asset_path('root/root.html') %>"
-          },
-          'current_user@': {
-            templateUrl: "<%= asset_path('root/current_user.html') %>",
-            controller: 'CurrentUser'
-          }
-        }
+        templateUrl: "<%= asset_path('root/root.html') %>",
+        controller: 'Root'
       }
     ].forEach(function(state) {
       $stateProvider.state(state);
     });
   })
   .controller(
-    'CurrentUser',
+    'Root',
     function($scope, Authentication) {
       console.log("setup root");
       $scope.user = null;
