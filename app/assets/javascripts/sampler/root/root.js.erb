@@ -19,26 +19,28 @@ angular
     function($scope, Authentication) {
       console.log("setup root");
       $scope.user = null;
+
+      var base = 'root';
       $scope.views = [
         {
-          root: 'root.login',
+          root: base + '.login',
           title: 'Login'
         },
         {
-          root: 'root.hello',
+          root: base + '.hello',
           title: 'Hello'
         },
         {
-          root: 'root.task',
+          root: base + '.task',
           state: '.index',
           title: 'Tasks'
         },
         {
-          root: 'root.upload',
+          root: base + '.upload',
           title: 'Upload'
         },
         {
-          root: 'root.about',
+          root: base + '.about',
           title: 'About'
         }
       ];
