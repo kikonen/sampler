@@ -1,6 +1,4 @@
 #!/usr/bin/env rake
-task 'assets:precompile' do
-end
 
 begin
   require 'bundler/setup'
