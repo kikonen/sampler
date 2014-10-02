@@ -32,5 +32,5 @@ Dummy::Application.configure do
   config.log_to = %w[file]
 
   # Show the logging configuration on STDOUT
-  config.show_log_configuration = true
+  config.show_log_configuration = false
 end

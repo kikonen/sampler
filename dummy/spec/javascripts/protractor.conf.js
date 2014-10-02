@@ -22,4 +22,13 @@ exports.config = {
         defaultTimeoutInterval: 30000
     },
 
+  "appenders": [
+    {
+      "type": "file",
+      "filename": "relative/path/to/log_file.log",
+      "maxLogSize": 20480,
+      "backups": 3,
+      "category": "relative-logger"
+    }
+  ]
 };

@@ -31,4 +31,10 @@ Dummy::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Set the logging destination(s)
+  config.log_to = %w[file]
+
+  # Show the logging configuration on STDOUT
+  config.show_log_configuration = true
 end

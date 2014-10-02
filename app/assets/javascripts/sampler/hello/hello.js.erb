@@ -32,6 +32,24 @@ angular
       config: '-'
     };
 
+    $scope.tableData = [
+      {
+        size: 'small',
+        color: 'blue',
+        class: 'cool',
+      },
+      {
+        size: 'medium',
+        color: 'red',
+        class: 'super',
+      },
+      {
+        size: 'big',
+        color: 'green',
+        class: 'mild',
+      },
+    ];
+
     $scope.call = function() {
       console.log("start call");
       var s = $scope.server;

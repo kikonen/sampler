@@ -7,11 +7,11 @@ angular
     function(
       Restangular) {
 
-      var url = 'http://localhost:3001';
+      var url = '';
 
-      function set(url) {
-        url = url;
-        Restangular.setBaseUrl(url);
+      function set(newUrl) {
+        url = newUrl;
+//        Restangular.setBaseUrl(newUrl);
       }
 
       return {

@@ -12,4 +12,17 @@ group :assets do
   gem 'therubyracer', platforms: :ruby
 end
 
+gem 'awesome_print'
+gem 'hashie'
+gem 'logging-rails'
+gem 'nokogiri', '1.5.6'
 gem 'protractor-rails'
+gem 'capybara'
+gem 'rspec'
+gem 'rspec-rails'
+gem 'capybara-webkit'
+gem 'selenium-webdriver'
+
+gem 'capybara-ng'
+#gem 'capybara-ng', path: '../../capybara-ng'
+#gem 'capybara-ng', git: 'git@github.com:kikonen/capybara-ng.git', tag: 'v0.0.1'

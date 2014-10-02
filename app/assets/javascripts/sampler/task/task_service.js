@@ -5,38 +5,41 @@ angular
   .factory(
     'TaskService',
     function(
+      $q,
       $filter,
       Restangular) {
 
       var state = {
-        base_url: '/api/tasks'
+        base_url: 'api/tasks'
       };
 
       return {
         state: function() { return state; },
-        all: function (fn) {
-          Restangular.all(state.base_url).getList().then(fn);
+        all: function () {
+          return Restangular.all(state.base_url).getList();
         },
         one: function (taskId, fn) {
-          Restangular.one(state.base_url, taskId).get().then(fn);
+          return Restangular.one(state.base_url, taskId).get();
         },
         create: function (fn) {
-          var task = {
-            id: null,
-            name: null,
-            message: null,
-            done: false
-          };
-          fn(task);
+          var d = $q.defer(),
+              task = {
+                id: null,
+                name: null,
+                message: null,
+                done: false
+              };
+          d.resolve(task);
+          return d.promise;
         },
-        delete: function(task, fn) {
-          task.remove().then(fn);
+        delete: function(task) {
+          return task.remove();
         },
-        save: function(task, fn) {
+        save: function(task) {
           if (task.id) {
-            task.save().then(fn);
+            return task.save();
           } else {
-            Restangular.all(state.base_url).post(task).then(fn);
+            return Restangular.all(state.base_url).post(task);
           }
         },
         tableAll: function($defer, params) {

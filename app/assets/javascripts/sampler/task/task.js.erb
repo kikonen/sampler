@@ -60,7 +60,8 @@ angular
 
       $scope.reload = function() {
         console.log("start reload");
-        $scope.fetchTasks(function(tasks) {
+        TaskService.all()
+          .then(function(tasks) {
             $scope.data.tasks = tasks;
           });
       };
@@ -105,15 +106,17 @@ angular
 
       $scope.task = {};
 
-      TaskService.one($stateParams.taskId, function(task) {
-        $scope.task = task;
-      });
+      TaskService.one($stateParams.taskId)
+        .then(function(task) {
+          $scope.task = task;
+        });
 
       $scope.deleteTask = function() {
         if (window.confirm("Delete " + $scope.task.name)) {
-          TaskService.delete($scope.task, function(task) {
-            $state.go('^.index');
-          });
+          TaskService.delete($scope.task)
+            .finally(function() {
+              $state.go('^.index');
+            });
         }
       };
     })
@@ -132,15 +135,16 @@ angular
         $scope.task = task;
       };
       if ($stateParams.taskId) {
-        TaskService.one($stateParams.taskId, fn);
+        TaskService.one($stateParams.taskId).then(fn);
       } else {
-        TaskService.create(fn);
+        TaskService.create().then(fn);
       }
 
       $scope.save = function() {
-        TaskService.save($scope.task, function(task) {
-          $state.go('^.show', { taskId: task.id });
-        });
+        TaskService.save($scope.task)
+          .then(function(task) {
+            $state.go('^.index', { taskId: task.id });
+          });
       };
 
       $scope.cancel = function() {

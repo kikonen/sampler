@@ -1,17 +1,16 @@
+require('./hello_page');
+
 describe('Hello', function() {
   it('Start hello', function(done) {
-    browser.get('http://localhost:4000/sampler');
-    expect(browser.getTitle()).toEqual('Sampler');
+    var page = new HelloPage();
+    page.get();
 
-    element(by.repeater('view in views').row(1)).click();
+    page.url.sendKeys('hello world');
+    page.payload.sendKeys('pay me');
 
-    element(by.model('server.url')).sendKeys('hello world');
-    element(by.model('server.payload')).sendKeys('pay me');
+    page.ok.click();
 
-    element(by.buttonText('Okey')).click();
-
-    var elem = element(by.binding('api.config'));
-    expect(elem.getText()).toMatch(/pay.*me/);
+    expect(page.config.getText()).toMatch(/pay.*me/);
 
     done();
   });

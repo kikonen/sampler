@@ -1,0 +1,48 @@
+<div>
+  <form ng-init="hello='foo'">
+    <label ng-bind="hello"></label>
+    <span>{{hello}}-span</span>
+
+    <label>Server:</label>
+    <input type="text" ng-model="server.url"/>
+    <input type="text" ng-model="server.url"/>
+    <br>
+
+    <label>Method:</label>
+    <select ng-options="r for r in ['GET', 'POST', 'PUT', 'DELETE']" ng-model="server.method" />
+    <br>
+
+    <label>API:</label>
+    <input type="text" ng-model="server.api" />
+    <br>
+
+    <label>Payload:</label>
+    <input type="text" ng-model="server.payload" />
+    <br>
+
+    <table>
+      <thead>
+        <tr>
+          <td>Size</td>
+          <td>Color</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in tableData" class="{{row.class}}">
+          <td><span>{{row.size}}</span><span>{{row.size}}</span><</td>
+          <td><span>1-{{row.color}}</span><span>2-{{row.color}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary" ng-click="call()">Okey</button>
+    <button type="rollback" class="btn" ng-click="clear()">Cancel</button>
+  </form>
+
+  <hr>
+  <b>Status:</b> {{ api.status }}<br
+  <b>Data:</b> {{ api.data }}<br>
+  <b>Headers:</b> {{ api.headers }}<br>
+  <b>Config:</b> {{ api.config }}<br>
+  <hr>
+</div>
