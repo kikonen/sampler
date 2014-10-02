@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ng-auth.strategies.oauth2" ng-controller="OAuth2CallbackCtrl">
+  <head>
+    <meta charset="utf-8">
+    <title>Authenticating...</title>
+  </head>
+  <body>
+    <p>Authenticating...</p>
+    <script>
+      var params = {};
+      var paramsArray = window.location.hash.replace('#', '').split('&');
+      for (var i = 0; i < paramsArray.length; i++) {
+        var kv = paramsArray[i].split('=');
+        params[kv[0]] = kv[1];
+      }
+      window.opener.postMessage(params, window.location.origin);
+      setTimeout(window.close, 500);
+    </script>
+  </body>
+</html>
