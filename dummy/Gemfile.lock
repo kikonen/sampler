@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:kikonen/capybara-ng.git
+  revision: f25683744cad22c65eaf6b806faa55280d83ac35
+  tag: v0.0.4
+  specs:
+    capybara-ng (0.0.4)
+      awesome_print (>= 1.2.0)
+
 PATH
   remote: ..
   specs:
@@ -54,8 +62,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-ng (0.0.3)
-      awesome_print (>= 1.2.0)
     capybara-webkit (1.3.0)
       capybara (>= 2.0.2, < 2.5.0)
       json
@@ -184,7 +190,7 @@ DEPENDENCIES
   awesome_print
   bootstrap-sass (~> 2.3.1.0)
   capybara
-  capybara-ng
+  capybara-ng!
   capybara-webkit
   hashie
   logging-rails

@@ -1,21 +1,32 @@
 require 'spec_helper'
 
 describe 'capybara', type: :feature  do
-  include Angular::DSL
-
   it 'create task' do
     visit 'http://localhost:4000/sampler'
 
     init_task_count = 2
 
+    expect(ng_eval('1 + 1')).to eq 2
+    expect(ng_location()).to eq '/home'
+    expect(ng_location_abs()).to eq 'http://localhost:4000/sampler/home'
+
     # login
-    ng_repeater_row('view in views', 0).click
+    ng_repeater_row('view in views', row: 0).click
+
+    have_field('foobar')
+    has_field?('foobar')
+#    find_field('foobar')
+    have_ng_model('user.username2')
+    has_ng_model?('user.username2')
+#    ng_model('user.username2')
+
+    expect(page).to have_ng_model('user.username')
     ng_model('user.username').set('admin')
     ng_model('user.password').set('password')
     click_button 'Login'
 
     # check initial state
-    ng_repeater_row('view in views', 2).click
+    ng_repeater_row('view in views', row: 2).click
     expect(ng_repeater_rows('task in $data').length).to eq init_task_count
 
     # create new task
